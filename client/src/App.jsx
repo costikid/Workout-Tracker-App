@@ -1,18 +1,20 @@
-import './App.css'
-import ExerciseForm from './components/ExerciseForm'
-import WorkoutList from './components/WorkoutList'
-import Timer from './components/Timer'
+import React, { useState } from 'react';
+import ExerciseForm from './components/ExerciseForm.jsx';
+import WorkoutList from './components/WorkoutList.jsx';
 
+const App = () => {
+  const [exercises, setExercises] = useState([]);
 
-function App() {
+  const handleExerciseAdded = (newExercise) => {
+    setExercises([...exercises, newExercise]);
+  };
 
   return (
-    <>
-      <ExerciseForm />
-      <WorkoutList />
-      <Timer />
-    </>
-  )
-}
+    <div className="app">
+      <ExerciseForm onExerciseAdded={handleExerciseAdded} />
+      <WorkoutList exercises={exercises} />
+    </div>
+  );
+};
 
-export default App
+export default App;
