@@ -62,4 +62,4 @@ exports.deleteExercise = async (req, res) => {
         console.error(err);
         res.status(500).json({ success: false, error: 'Server error' });
     }
-};
+};  
