@@ -6,7 +6,10 @@ const WorkoutList = ({ exercises }) => {
     <div className="workout-list">
       <h2>Workout List</h2>
       {exercises.map((exercise, index) => (
-        <WorkoutItem key={index} exercise={exercise} />
+        <React.Fragment key={index}>
+          <WorkoutItem exercise={exercise} />
+          <hr /> {}
+        </React.Fragment>
       ))}
     </div>
   );

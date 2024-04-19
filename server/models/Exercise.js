@@ -5,18 +5,11 @@ const exerciseSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    sets: {
-        type: Number,
-        required: true
-    },
-    reps: {
-        type: Number,
-        required: true
-    },
-    restInterval: {
-        type: Number,
-        required: true
-    },
+    type: String,
+    muscle: String,
+    equipment: String,
+    difficulty: String,
+    instructions: String
 });
 
 module.exports = mongoose.model('Exercise', exerciseSchema);

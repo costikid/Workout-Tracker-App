@@ -3,16 +3,20 @@ import ExerciseForm from './components/ExerciseForm.jsx';
 import WorkoutList from './components/WorkoutList.jsx';
 
 const App = () => {
-  const [exercises, setExercises] = useState([]);
+  //hold the list of exercises
+  const [workoutList, setWorkoutList] = useState([]);
 
+  //add exercise to the workout list
   const handleExerciseAdded = (newExercise) => {
-    setExercises([...exercises, newExercise]);
+    setWorkoutList([...workoutList, newExercise]);
   };
 
   return (
-    <div className="app">
+    <div>
+      {}
       <ExerciseForm onExerciseAdded={handleExerciseAdded} />
-      <WorkoutList exercises={exercises} />
+      {}
+      <WorkoutList exercises={workoutList} />
     </div>
   );
 };

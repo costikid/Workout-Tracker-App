@@ -17,12 +17,11 @@ app.use('/exercises', exerciseRouter);
 
 app.use(express.static(path.join(__dirname, 'build')));
 
-//Fallback route to serve index.html for all other routes
+//serve index.html for all other routes (fallback route)
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-//MongoDB connection
 const MONGODB_URI = 'mongodb://127.0.0.1:27017/workoutApp';
 
 mongoose.connect(MONGODB_URI, {
