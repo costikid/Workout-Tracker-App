@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import Timer from './Timer';
 
-const WorkoutItem = ({ exercise }) => {
+const WorkoutItem = ({ exercise, onFetchWorkoutHistory, onWorkoutDone }) => {
   const [sets, setSets] = useState([]);
   const [currentSetIndex, setCurrentSetIndex] = useState(-1);
   const [timerStarted, setTimerStarted] = useState(false);
   const [timerDuration, setTimerDuration] = useState(60);
+  const [showWorkoutHistory, setShowWorkoutHistory] = useState(false);
 
   const handleAddSet = () => {
     const newSet = { weight: '', reps: '' };
@@ -37,6 +38,26 @@ const WorkoutItem = ({ exercise }) => {
     setTimerStarted(false);
   };
 
+  const handleFetchWorkoutHistory = () => {
+    if (onFetchWorkoutHistory && typeof onFetchWorkoutHistory === 'function') {
+      onFetchWorkoutHistory();
+    }
+    setShowWorkoutHistory(true);
+  };
+
+  
+  const handleWorkoutDone = async () => {
+    try {
+        if (onWorkoutDone && typeof onWorkoutDone === 'function') {
+            const workoutData = sets.map(set => ({ reps: set.reps, weight: set.weight }));
+            await onWorkoutDone(exercise._id, workoutData);
+            setShowWorkoutHistory(true);
+        }
+    } catch (error) {
+        console.error('Error marking workout as done:', error);
+    }
+};
+
   return (
     <div className="workout-item card mb-3">
       <div className="card-body">
@@ -46,6 +67,12 @@ const WorkoutItem = ({ exercise }) => {
         <p className="card-text">Difficulty: {exercise.difficulty}</p>
         <p className="card-text">Instructions: {exercise.instructions}</p>
         <div className="set-tracking">
+          {}
+          {showWorkoutHistory && (
+            <div>
+              {}
+            </div>
+          )}
           {sets.map((set, index) => (
             <div key={index}>
               <p>Set {index + 1}</p>
@@ -73,6 +100,8 @@ const WorkoutItem = ({ exercise }) => {
             </div>
           ))}
           <button className="btn btn-primary" onClick={handleAddSet}>Add Set</button>
+          <button onClick={handleFetchWorkoutHistory} className="btn btn-secondary">Lift History</button>
+          <button onClick={handleWorkoutDone} className="btn btn-primary mt-2">Workout Done</button>
         </div>
       </div>
     </div>

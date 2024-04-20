@@ -9,7 +9,14 @@ const exerciseSchema = new mongoose.Schema({
     muscle: String,
     equipment: String,
     difficulty: String,
-    instructions: String
+    instructions: String,
+    workoutHistory: [
+        {
+            sets: Number,
+            reps: Number,
+            weight: Number,
+        }
+    ]
 });
 
 module.exports = mongoose.model('Exercise', exerciseSchema);

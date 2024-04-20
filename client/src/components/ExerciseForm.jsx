@@ -18,7 +18,7 @@ const ExerciseForm = ({ onExerciseAdded }) => {
       const response = await fetch(`https://api.api-ninjas.com/v1/exercises?muscle=${formData.muscle}&type=${formData.type}&difficulty=${formData.difficulty}`, {
         method: 'GET',
         headers: {
-          'X-Api-Key': 'Dic2lIcXCQ5ed/PRyq0tzA==PhgqpUUIfpj9H2a0'
+          'X-Api-Key': 'empty for now, i will fill in'
         }
       });
       if (!response.ok) {
