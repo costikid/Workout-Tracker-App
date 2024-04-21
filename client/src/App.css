@@ -146,3 +146,38 @@ html body .btn.my-add-exercise-button:hover {
   font-size: 1rem;
   color: #666;
 }
+
+.carousels-container {
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.individual-carousel-container {
+  flex: 1;
+  margin: 0 10px;
+  max-width: 400px;
+}
+
+.carousel-img {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.carousel-caption {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+}
