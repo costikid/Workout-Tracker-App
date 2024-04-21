@@ -1,20 +1,8 @@
-.button {
-  background-color: #ffcc00;
-  color: #1a1a1a;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+html, body {
+  height: 100%;
+  background-color: #121212;
 }
 
-.button:hover {
-  background-color: #e6b800;
-}
-
-/* Image styles */
-.image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 5px;
+h1, h2, h3, h4, h5, h6, p {
+  margin: 10px 0;
 }

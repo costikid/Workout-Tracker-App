@@ -59,7 +59,7 @@ const WorkoutItem = ({ exercise, onFetchWorkoutHistory, onWorkoutDone }) => {
 };
 
   return (
-    <div className="workout-item card mb-3">
+    <div className="workout-item card card-custom mb-3">
       <div className="card-body">
         <h5 className="card-title">{exercise.name}</h5>
         <p className="card-text">Type: {exercise.type}</p>
@@ -99,9 +99,11 @@ const WorkoutItem = ({ exercise, onFetchWorkoutHistory, onWorkoutDone }) => {
               )}
             </div>
           ))}
-          <button className="btn btn-primary" onClick={handleAddSet}>Add Set</button>
-          <button onClick={handleFetchWorkoutHistory} className="btn btn-secondary">Lift History</button>
-          <button onClick={handleWorkoutDone} className="btn btn-primary mt-2">Workout Done</button>
+          <div className="d-grid gap-2 mt-3">
+            <button className="btn btn-custom" onClick={handleAddSet}>Add Set</button>
+            <button onClick={handleFetchWorkoutHistory} className="btn btn-custom">Lift History</button>
+            <button onClick={handleWorkoutDone} className="btn btn-custom mt-2">Workout Done</button>
+          </div>
         </div>
       </div>
     </div>

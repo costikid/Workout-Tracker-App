@@ -20,7 +20,7 @@ const Timer = ({ seconds }) => {
   const secondsLeft = remainingSeconds % 60;
 
   return (
-    <div className="timer card mt-3">
+    <div className="timer card-custom">
       <div className="card-body">
         <h5 className="card-title">Timer</h5>
         <p className="card-text">Time Remaining: {minutes}:{secondsLeft < 10 ? `0${secondsLeft}` : secondsLeft}</p>

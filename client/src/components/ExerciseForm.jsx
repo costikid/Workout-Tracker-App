@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../App.css';
 
 const ExerciseForm = ({ onExerciseAdded }) => {
   const [formData, setFormData] = useState({
@@ -18,13 +19,12 @@ const ExerciseForm = ({ onExerciseAdded }) => {
       const response = await fetch(`https://api.api-ninjas.com/v1/exercises?muscle=${formData.muscle}&type=${formData.type}&difficulty=${formData.difficulty}`, {
         method: 'GET',
         headers: {
-          'X-Api-Key': 'empty for now, i will fill in'
+          'X-Api-Key': import.meta.env.VITE_API_KEY,
         }
       });
       if (!response.ok) {
         throw new Error('Failed to fetch exercises');
       }
-      
       const data = await response.json();
       setExercises(data);
       setError(null);
@@ -65,18 +65,20 @@ const ExerciseForm = ({ onExerciseAdded }) => {
       [e.target.name]: e.target.value
     });
   };
-
-  const muscleGroupOptions = ['Abdominals', 'Abductors', 'Biceps', 'Calves', 'Lats'];
-  const exerciseTypeOptions = ['Strength'];
+  
+  
+  //i decided to enter them manually according to the api list
+  const muscleGroupOptions = ['Abdominals', 'Abductors', 'Adductors', 'Biceps', 'Calves', 'Chest', 'Forearms', 
+  'Glutes', 'Hamstrings', 'Lats', 'Lower_back', 'Middle_back', 'Neck', 'Quadriceps', 'Traps', 'Triceps'];
+  const exerciseTypeOptions = ['Strength', 'Cardio', 'Powerlifting', 'Stretching'];
   const difficultyOptions = ['Beginner', 'Intermediate', 'Advanced'];
 
   return (
     <div className="container">
       <div className="card mt-4">
         <div className="card-body">
-          <h3 className="card-title">Find Exercises</h3>
           {error && <p className="error-message">{error}</p>}
-          <form onSubmit={handleSubmit} className="row g-3 align-items-center">
+          <form onSubmit={handleSubmit} className="row g-3 align-items-center centered-form">
             <div className="col-auto">
               <label htmlFor="muscle" className="visually-hidden">Muscle Group</label>
               <select id="muscle" className="form-select" name="muscle" value={formData.muscle} onChange={handleChange}>
@@ -105,28 +107,28 @@ const ExerciseForm = ({ onExerciseAdded }) => {
               </select>
             </div>
             <div className="col-auto">
-              <button type="submit" className="btn btn-primary">Search</button>
+            <button type="submit" className="btn btn-primary my-search-button">Search</button>
             </div>
           </form>
         </div>
       </div>
       {exercises.length > 0 && (
-        <div className="mt-4">
+        <div className="mt-4 found-exercises">
           <h4>Found Exercises:</h4>
           <ul className="list-group">
             {exercises.map((exercise, index) => (
               <li key={index} className="list-group-item">
-                <h5>{exercise.name}</h5>
-                <p>Type: {exercise.type}</p>
-                <p>Muscle: {exercise.muscle}</p>
-                <p>Difficulty: {exercise.difficulty}</p>
-                <p>Instructions: {exercise.instructions}</p>
-                <button onClick={() => handleAddExercise(exercise)} className="btn btn-primary">Add Exercise</button>
+                <h5 className="exercise-name">{exercise.name}</h5> {}
+                <p className="exercise-type">Type: {exercise.type}</p>
+                <p className="exercise-muscle">Muscle: {exercise.muscle}</p>
+                <p className="exercise-difficulty">Difficulty: {exercise.difficulty}</p>
+                <p className="exercise-instructions">{exercise.instructions}</p>
+                <button onClick={() => handleAddExercise(exercise)} className="btn btn-primary my-add-exercise-button">Add Exercise</button>
               </li>
             ))}
           </ul>
         </div>
-      )}
+      )}  
     </div>
   );
 };
