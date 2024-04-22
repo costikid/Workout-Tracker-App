@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../App.css';
+import { fetchExercises, addExercise } from '../services/exerciseService';
 
 const ExerciseForm = ({ onExerciseAdded }) => {
   const [formData, setFormData] = useState({
@@ -16,16 +17,7 @@ const ExerciseForm = ({ onExerciseAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`https://api.api-ninjas.com/v1/exercises?muscle=${formData.muscle}&type=${formData.type}&difficulty=${formData.difficulty}`, {
-        method: 'GET',
-        headers: {
-          'X-Api-Key': import.meta.env.VITE_API_KEY,
-        }
-      });
-      if (!response.ok) {
-        throw new Error('Failed to fetch exercises');
-      }
-      const data = await response.json();
+      const data = await fetchExercises(formData.muscle, formData.type, formData.difficulty);
       setExercises(data);
       setError(null);
     } catch (error) {
@@ -37,22 +29,9 @@ const ExerciseForm = ({ onExerciseAdded }) => {
   const handleAddExercise = async (exercise) => {
     try {
       onExerciseAdded(exercise);
-  
       const updatedExercises = [...formData.exercises, { ...exercise, sets: [] }];
       setFormData({ ...formData, exercises: updatedExercises });
-
-      const response = await fetch('http://localhost:3000/exercises', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(exercise)
-      });
-      if (!response.ok) {
-        throw new Error('Failed to add exercise');
-      }
-      
-      const newExercise = await response.json();
+      await addExercise(exercise);
     } catch (error) {
       console.error('Error adding exercise:', error);
       setError('Failed to add exercise. Please try again.');

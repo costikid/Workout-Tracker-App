@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Timer from './Timer';
 
-const WorkoutItem = ({ exercise, onFetchWorkoutHistory, onWorkoutDone }) => {
+const WorkoutItem = ({ exercise, onFetchWorkoutHistory, onExerciseDataChange }) => {
   const [sets, setSets] = useState([]);
   const [currentSetIndex, setCurrentSetIndex] = useState(-1);
   const [timerStarted, setTimerStarted] = useState(false);
   const [timerDuration, setTimerDuration] = useState(60);
   const [showWorkoutHistory, setShowWorkoutHistory] = useState(false);
+
+  useEffect(() => {
+    if (onExerciseDataChange) {
+      onExerciseDataChange(exercise.id, sets);
+    }
+  }, [sets, exercise.id, onExerciseDataChange]);
 
   const handleAddSet = () => {
     const newSet = { weight: '', reps: '' };
@@ -45,19 +51,6 @@ const WorkoutItem = ({ exercise, onFetchWorkoutHistory, onWorkoutDone }) => {
     setShowWorkoutHistory(true);
   };
 
-  
-  const handleWorkoutDone = async () => {
-    try {
-        if (onWorkoutDone && typeof onWorkoutDone === 'function') {
-            const workoutData = sets.map(set => ({ reps: set.reps, weight: set.weight }));
-            await onWorkoutDone(exercise._id, workoutData);
-            setShowWorkoutHistory(true);
-        }
-    } catch (error) {
-        console.error('Error marking workout as done:', error);
-    }
-};
-
   return (
     <div className="workout-item card card-custom mb-3">
       <div className="card-body">
@@ -67,10 +60,8 @@ const WorkoutItem = ({ exercise, onFetchWorkoutHistory, onWorkoutDone }) => {
         <p className="card-text">Difficulty: {exercise.difficulty}</p>
         <p className="card-text">Instructions: {exercise.instructions}</p>
         <div className="set-tracking">
-          {}
           {showWorkoutHistory && (
             <div>
-              {}
             </div>
           )}
           {sets.map((set, index) => (
@@ -102,7 +93,6 @@ const WorkoutItem = ({ exercise, onFetchWorkoutHistory, onWorkoutDone }) => {
           <div className="d-grid gap-2 mt-3">
             <button className="btn btn-custom" onClick={handleAddSet}>Add Set</button>
             <button onClick={handleFetchWorkoutHistory} className="btn btn-custom">Lift History</button>
-            <button onClick={handleWorkoutDone} className="btn btn-custom mt-2">Workout Done</button>
           </div>
         </div>
       </div>

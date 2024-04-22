@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Home from './pages/Home.jsx';
 import Workouts from './pages/Workouts.jsx';
 import WorkoutList from './components/WorkoutList.jsx';
-import ExerciseForm from './components/ExerciseForm.jsx';
 import './App.css';
 import './index.css';
 

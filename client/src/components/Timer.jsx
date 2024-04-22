@@ -4,17 +4,16 @@ const Timer = ({ seconds }) => {
   const [remainingSeconds, setRemainingSeconds] = useState(seconds);
 
   useEffect(() => {
-    let interval;
+    let timeout;
+    
     if (remainingSeconds > 0) {
-      interval = setInterval(() => {
+      timeout = setTimeout(() => {
         setRemainingSeconds(prevSeconds => prevSeconds - 1);
       }, 1000);
-    } else {
-      clearInterval(interval);
     }
-
-    return () => clearInterval(interval);
-  }, [remainingSeconds]);
+    
+    return () => clearTimeout(timeout);
+  }, [remainingSeconds]);  
 
   const minutes = Math.floor(remainingSeconds / 60);
   const secondsLeft = remainingSeconds % 60;
