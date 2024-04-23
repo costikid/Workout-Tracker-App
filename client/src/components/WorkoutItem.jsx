@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import Timer from './Timer';
 
-const WorkoutItem = ({ exercise, onFetchWorkoutHistory, onExerciseDataChange }) => {
+const WorkoutItem = ({ exercise, onExerciseDataChange, setWorkoutData }) => {
   const [sets, setSets] = useState([]);
   const [currentSetIndex, setCurrentSetIndex] = useState(-1);
   const [timerStarted, setTimerStarted] = useState(false);
   const [timerDuration, setTimerDuration] = useState(60);
-  const [showWorkoutHistory, setShowWorkoutHistory] = useState(false);
 
-  useEffect(() => {
-    if (onExerciseDataChange) {
-      onExerciseDataChange(exercise.id, sets);
+  // useEffect(() => {
+  //   if (onExerciseDataChange) {
+  //     onExerciseDataChange(exercise.id, sets);
+  //   }
+  // }, [sets, exercise.id, onExerciseDataChange]);
+
+  useEffect(()=>{
+    if (exercise && sets.length) {
+      setWorkoutData((data)=>{
+        data[String(exercise._id)] = sets;
+        return data;
+      })
     }
-  }, [sets, exercise.id, onExerciseDataChange]);
+  },[sets])
 
   const handleAddSet = () => {
     const newSet = { weight: '', reps: '' };
@@ -60,10 +68,6 @@ const WorkoutItem = ({ exercise, onFetchWorkoutHistory, onExerciseDataChange }) 
         <p className="card-text">Difficulty: {exercise.difficulty}</p>
         <p className="card-text">Instructions: {exercise.instructions}</p>
         <div className="set-tracking">
-          {showWorkoutHistory && (
-            <div>
-            </div>
-          )}
           {sets.map((set, index) => (
             <div key={index}>
               <p>Set {index + 1}</p>

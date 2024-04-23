@@ -69,9 +69,19 @@ exports.markWorkoutDone = async (req, res) => {
     try {
         console.log('Request Body:', req.body); 
         for (const [exerciseId, sets] of Object.entries(req.body)) {
+            console.log('Exercise ID:', exerciseId);
+            console.log('Sets:', sets);
             const exercise = await Exercise.findById(exerciseId);
+            console.log('Exercise:', exercise);
             if (exercise) {
-                exercise.workoutHistory.push(...sets);
+                const formattedSets = sets.map(set => ({
+                    sets: set.sets,
+                    reps: set.reps,
+                    weight: set.weight
+                }));
+                console.log('Formatted Sets:', formattedSets);
+                exercise.workoutHistory.push(...formattedSets);
+                console.log('Updated Exercise:', exercise); //log the exercise after updating workoutHistory
                 await exercise.save();
             }
         }

@@ -28,10 +28,11 @@ const ExerciseForm = ({ onExerciseAdded }) => {
 
   const handleAddExercise = async (exercise) => {
     try {
-      onExerciseAdded(exercise);
       const updatedExercises = [...formData.exercises, { ...exercise, sets: [] }];
       setFormData({ ...formData, exercises: updatedExercises });
-      await addExercise(exercise);
+      const { data } = await addExercise(exercise);
+      console.log('received data', data)
+      onExerciseAdded(data);
     } catch (error) {
       console.error('Error adding exercise:', error);
       setError('Failed to add exercise. Please try again.');
