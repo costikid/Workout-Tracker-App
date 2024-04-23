@@ -181,3 +181,36 @@ html body .btn.my-add-exercise-button:hover {
   background: rgba(0, 0, 0, 0.5);
   color: white;
 }
+
+.image-grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+.individual-image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.image-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+}
+
+.quote-container {
+  margin-top: auto;
+  text-align: center;
+  padding: 20px;
+}
+
+.quote-container p {
+  margin: 0;
+}

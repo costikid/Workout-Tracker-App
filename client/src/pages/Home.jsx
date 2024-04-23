@@ -1,66 +1,62 @@
-import React from 'react';
-import { Carousel } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../App.css';
 import carousel1Img1 from '../images/carousel-1-img-1.jpg';
 import carousel2Img1 from '../images/carousel-2-img-1.jpg';
 import carousel3Img1 from '../images/carousel-3-img-1.jpg';
 
-//an array of objects - each object contains data for each carousel
 const carouselsData = [
   {
     id: 1,
-    items: [
-      {
-        imgSrc: carousel1Img1,
-        captionTitle: 'Lets go!!',
-      },
-    ]
+    imgSrc: carousel1Img1,
+    captionTitle: 'Elevate Your Fitness Game',
   },
   {
     id: 2,
-    items: [
-      {
-        imgSrc: carousel2Img1,
-        captionTitle: 'Take the step!!',
-      },
-    ]
+    imgSrc: carousel2Img1,
+    captionTitle: 'Set Your Goals',
   },
   {
     id: 3,
-    items: [
-      {
-        imgSrc: carousel3Img1,
-        captionTitle: 'Are you ready!!',
-      },
-    ]
+    imgSrc: carousel3Img1,
+    captionTitle: 'Join Our Community',
   }
 ];
+
+const quotes = [
+  "'Take care of your body. It's the only place you have to live.' – Jim Rohn",
+  "'If you don’t find the time, if you don’t do the work, you don’t get the results.' - Arnold Schwarzenegger",
+  "'The hardest lift of all is lifting your butt off the couch.' – Arnold Schwarzenegger",
+  "'Once you are exercising regularly, the hardest thing is to stop it.' – Erin Gray",
+  "'You miss one hundred percent of the shots you don’t take.' – Wayne Gretzky"
+];
+
+const getRandomQuote = () => {
+  const randomIndex = Math.floor(Math.random() * quotes.length);
+  return quotes[randomIndex];
+};
 
 const Home = () => {
   return (
     <div className="welcome-message">
       <h1>Welcome to Workout Hub</h1>
       <p>Your personal guide to fitness and workouts.</p>
-      <div className="carousels-container">
-        {carouselsData.map((carouselData) => (
-          <div key={carouselData.id} className="individual-carousel-container">
-            <Carousel>
-              {carouselData.items.map((item, idx) => (
-                <Carousel.Item key={idx}>
-                  <img
-                    className="d-block w-100 carousel-img"
-                    src={item.imgSrc}
-                    alt={`Slide ${carouselData.id}-${idx + 1}`}
-                  />
-                  <Carousel.Caption>
-                    <h3>{item.captionTitle}</h3>
-                    <p>{item.captionDescription}</p> 
-                  </Carousel.Caption>
-                </Carousel.Item>
-              ))}
-            </Carousel>
+      <div className="image-grid-container">
+        {carouselsData.map((item) => (
+          <div key={item.id} className="individual-image-container">
+            <img
+              className="d-block w-100"
+              src={item.imgSrc}
+              alt={`Image ${item.id}`}
+            />
+            <div className="image-caption">
+              <h3>{item.captionTitle}</h3>
+            </div>
           </div>
         ))}
+      </div>
+      <div className="quote-container">
+        <p>"{getRandomQuote()}"</p>
       </div>
     </div>
   );

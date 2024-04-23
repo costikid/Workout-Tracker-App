@@ -84,13 +84,19 @@ const WorkoutItem = ({ exercise, onExerciseDataChange, setWorkoutData }) => {
                 placeholder="Reps"
               />
               {index === currentSetIndex && timerStarted && (
+                <div style={{ textAlign: 'center' }}>
                 <div>
-                  <Timer seconds={timerDuration} onComplete={() => console.log('Timer completed')} />
-                  <select value={timerDuration} onChange={handleTimerDurationChange}>
-                    <option value={60}>60 seconds</option>
-                    <option value={90}>90 seconds</option>
-                  </select>
+                  {index === currentSetIndex && timerStarted && (
+                    <div>
+                      <Timer seconds={timerDuration} onComplete={() => console.log('Timer completed')} />
+                      <select value={timerDuration} onChange={handleTimerDurationChange}>
+                        <option value={60}>60 seconds</option>
+                        <option value={90}>90 seconds</option>
+                      </select>
+                    </div>
+                  )}
                 </div>
+              </div>
               )}
             </div>
           ))}
