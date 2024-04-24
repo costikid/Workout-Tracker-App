@@ -81,13 +81,29 @@ exports.markWorkoutDone = async (req, res) => {
                 }));
                 console.log('Formatted Sets:', formattedSets);
                 exercise.workoutHistory.push(...formattedSets);
-                console.log('Updated Exercise:', exercise); //log the exercise after updating workoutHistory
+                console.log('Updated Exercise:', exercise);
                 await exercise.save();
             }
         }
         res.status(200).json({ success: true, message: 'Workout history updated for all exercises' });
     } catch (error) {
         console.error('Error updating workout history:', error);
+        res.status(500).json({ success: false, error: 'Server error' });
+    }
+};
+
+//fetch last lift history for exercise by ID
+exports.getExerciseLiftHistory = async (req, res) => {
+    try {
+        const exerciseId = req.params.id;
+        const exercise = await Exercise.findById(exerciseId);
+        if (!exercise) {
+            return res.status(404).json({ success: false, error: 'Exercise not found' });
+        }
+        const liftHistory = exercise.workoutHistory.slice(-1)[0];
+        res.status(200).json({ success: true, data: liftHistory });
+    } catch (error) {
+        console.error('Error fetching lift history:', error);
         res.status(500).json({ success: false, error: 'Server error' });
     }
 };
