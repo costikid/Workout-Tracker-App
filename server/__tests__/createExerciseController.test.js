@@ -1,12 +1,17 @@
-const { createExercise } = require('../dist/controllers/exerciseController');
+const { createExercise, getExercises } = require('../dist/controllers/exerciseController');
 const Exercise = require('../dist/models/Exercise');
 
 const mockRequest = () => {
   const req = {};
-  req.body = {};
+  req.body = {
+    name: 'Test Exercise',
+    type: 'Test Type',
+    muscle: 'Test Muscle',
+    difficulty: 'Test Difficulty',
+    instructions: 'Test Instructions',
+  };
   return req;
 };
-
 const mockResponse = () => {
   const res = {};
   res.status = jest.fn().mockReturnValue(res);
@@ -14,16 +19,22 @@ const mockResponse = () => {
   return res;
 };
 
-describe('createExercise', () => {
-  it('should return an error if request body is empty', async () => {
-    const req = mockRequest();
-    const res = mockResponse();
+describe('Exercise Controller', () => {
+  describe('getExercises', () => {
+    it('should return a list of exercises', async () => {
+      // Test implementation for getExercises
+    });
+  });
 
-    // Call the controller function without setting req.body
-    await createExercise(req, res);
+  describe('createExercise', () => {
+    it('should return an error if request body is empty', async () => {
+      const req = mockRequest();
+      const res = mockResponse();
 
-    // Check if status 500 (Server error) is returned
-    expect(res.status).toHaveBeenCalledWith(500);
-    expect(res.json).toHaveBeenCalledWith({ success: false, error: "Server error" });
+      await createExercise(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ success: false, error: "Server error" });
+    });
   });
 });
