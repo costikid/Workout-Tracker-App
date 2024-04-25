@@ -2,7 +2,6 @@ import express, { Express } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import exerciseRouter from "./router";
-import path from "path";
 import { connectToDB } from "./setup";
 
 const app: Express = express();
