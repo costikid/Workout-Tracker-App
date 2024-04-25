@@ -9,7 +9,9 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
-
+.box{
+  
+}
 .sidebar {
   width: 250px;
   background-color: #1f1f1f;
