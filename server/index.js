@@ -1,26 +1,25 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const exerciseRouter = require('./router');
-const path = require('path');
-const { connectToDB, startServer } = require('./setup');
-
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-
-app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(exerciseRouter);
-
-//connect to MongoDB and start server
-connectToDB()
-  .then(() => {
-    startServer(app, PORT);
-  })
-  .catch(err => {
-    console.error('Error connecting to MongoDB:', err);
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
+const body_parser_1 = __importDefault(require("body-parser"));
+const router_1 = __importDefault(require("./router"));
+const setup_1 = require("./setup");
+const app = (0, express_1.default)();
+const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
+app.use((0, cors_1.default)());
+app.use(body_parser_1.default.json());
+app.use(body_parser_1.default.urlencoded({ extended: true }));
+app.use(router_1.default);
+// Connect to MongoDB and start server
+(0, setup_1.connectToDB)()
+    .then(() => {
+    (0, setup_1.startServer)(app, PORT);
+})
+    .catch((err) => {
+    console.error("Error connecting to MongoDB:", err);
     process.exit(1);
-  });
+});

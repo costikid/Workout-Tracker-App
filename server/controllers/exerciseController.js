@@ -1,7 +1,16 @@
-const Exercise = require('../models/Exercise');
-
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+const Exercise = require("../models/Exercise");
 //creating a new exercise
-exports.createExercise = async (req, res) => {
+exports.createExercise = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { name, type, muscle, difficulty, instructions } = req.body;
         const exercise = new Exercise({
@@ -9,101 +18,113 @@ exports.createExercise = async (req, res) => {
             type,
             muscle,
             difficulty,
-            instructions
+            instructions,
         });
-        await exercise.save();
+        yield exercise.save();
         res.status(201).json({ success: true, data: exercise });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ success: false, error: 'Server error' });
     }
-};
-
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false, error: "Server error" });
+    }
+});
 //getting all exercises
-exports.getExercises = async (req, res) => {
+exports.getExercises = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const exercises = await Exercise.find();
+        const exercises = yield Exercise.find();
         res.status(200).json({ success: true, data: exercises });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ success: false, error: 'Server error' });
     }
-};
-
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false, error: "Server error" });
+    }
+});
 //updating an exercise by ID
-exports.updateExercise = async (req, res) => {
+exports.updateExercise = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { name, sets, reps, restInterval } = req.body;
-        const exercise = await Exercise.findByIdAndUpdate(req.params.id, {
+        const exercise = yield Exercise.findByIdAndUpdate(req.params.id, {
             name,
             sets,
             reps,
-            restInterval
+            restInterval,
         }, { new: true });
         if (!exercise) {
-            return res.status(404).json({ success: false, error: 'Exercise not found' });
+            return res
+                .status(404)
+                .json({ success: false, error: "Exercise not found" });
         }
         res.status(200).json({ success: true, data: exercise });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ success: false, error: 'Server error' });
     }
-};
-
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false, error: "Server error" });
+    }
+});
 //deleting an exercise by ID
-exports.deleteExercise = async (req, res) => {
+exports.deleteExercise = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const exercise = await Exercise.findByIdAndDelete(req.params.id);
+        const exercise = yield Exercise.findByIdAndDelete(req.params.id);
         if (!exercise) {
-            return res.status(404).json({ success: false, error: 'Exercise not found' });
+            return res
+                .status(404)
+                .json({ success: false, error: "Exercise not found" });
         }
         res.status(200).json({ success: true, data: {} });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ success: false, error: 'Server error' });
     }
-};
-
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false, error: "Server error" });
+    }
+});
 //workout is done and storing workout history
-exports.markWorkoutDone = async (req, res) => {
+exports.markWorkoutDone = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log('Request Body:', req.body); 
+        console.log("Request Body:", req.body);
         for (const [exerciseId, sets] of Object.entries(req.body)) {
-            console.log('Exercise ID:', exerciseId);
-            console.log('Sets:', sets);
-            const exercise = await Exercise.findById(exerciseId);
-            console.log('Exercise:', exercise);
+            console.log("Exercise ID:", exerciseId);
+            console.log("Sets:", sets);
+            const exercise = yield Exercise.findById(exerciseId);
+            console.log("Exercise:", exercise);
             if (exercise) {
-                const formattedSets = sets.map(set => ({
+                const formattedSets = sets.map((set) => ({
                     sets: set.sets,
                     reps: set.reps,
-                    weight: set.weight
+                    weight: set.weight,
                 }));
-                console.log('Formatted Sets:', formattedSets);
+                console.log("Formatted Sets:", formattedSets);
                 exercise.workoutHistory.push(...formattedSets);
-                console.log('Updated Exercise:', exercise);
-                await exercise.save();
+                console.log("Updated Exercise:", exercise);
+                yield exercise.save();
             }
         }
-        res.status(200).json({ success: true, message: 'Workout history updated for all exercises' });
-    } catch (error) {
-        console.error('Error updating workout history:', error);
-        res.status(500).json({ success: false, error: 'Server error' });
+        res
+            .status(200)
+            .json({
+            success: true,
+            message: "Workout history updated for all exercises",
+        });
     }
-};
-
+    catch (error) {
+        console.error("Error updating workout history:", error);
+        res.status(500).json({ success: false, error: "Server error" });
+    }
+});
 //fetch last lift history for exercise by ID
-exports.getExerciseLiftHistory = async (req, res) => {
+exports.getExerciseLiftHistory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const exerciseId = req.params.id;
-        const exercise = await Exercise.findById(exerciseId);
+        const exercise = yield Exercise.findById(exerciseId);
         if (!exercise) {
-            return res.status(404).json({ success: false, error: 'Exercise not found' });
+            return res
+                .status(404)
+                .json({ success: false, error: "Exercise not found" });
         }
         const liftHistory = exercise.workoutHistory.slice(-1)[0];
         res.status(200).json({ success: true, data: liftHistory });
-    } catch (error) {
-        console.error('Error fetching lift history:', error);
-        res.status(500).json({ success: false, error: 'Server error' });
     }
-};
+    catch (error) {
+        console.error("Error fetching lift history:", error);
+        res.status(500).json({ success: false, error: "Server error" });
+    }
+});

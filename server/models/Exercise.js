@@ -1,5 +1,5 @@
+"use strict";
 const mongoose = require('mongoose');
-
 const exerciseSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -18,5 +18,4 @@ const exerciseSchema = new mongoose.Schema({
         }
     ]
 });
-
 module.exports = mongoose.model('Exercise', exerciseSchema);
