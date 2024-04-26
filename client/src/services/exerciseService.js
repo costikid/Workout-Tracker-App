@@ -1,4 +1,4 @@
-const BASE_URL = 'https://api.api-ninjas.com/v1';
+const BASE_URL = 'https://api-ninjas.com/api/exercises';
 
 export const fetchExercises = async (muscle, type, difficulty) => {
   const url = `${BASE_URL}/exercises?muscle=${muscle}&type=${type}&difficulty=${difficulty}`;
