@@ -1,0 +1,9 @@
+.main-Link{
+    text-decoration: none;
+    color: white;
+  }
+
+.main-Link:hover{
+  font-size: 2.03rem;
+  color: rgb(171, 173, 174);
+}

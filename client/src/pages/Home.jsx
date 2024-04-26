@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import '../App.css';
+import './Home.css'
+
 import carousel1Img1 from '../images/carousel-1-img-1.jpg';
 import carousel2Img1 from '../images/carousel-2-img-1.jpg';
 import carousel3Img1 from '../images/carousel-3-img-1.jpg';
@@ -10,16 +13,21 @@ const carouselsData = [
     id: 1,
     imgSrc: carousel1Img1,
     captionTitle: 'Elevate Your Fitness Game',
+    link: '#',
   },
   {
     id: 2,
     imgSrc: carousel2Img1,
     captionTitle: 'Set Your Goals',
+    link: '/goals',
+
   },
   {
     id: 3,
     imgSrc: carousel3Img1,
     captionTitle: 'Join Our Community',
+    link: '#',
+
   }
 ];
 
@@ -38,6 +46,7 @@ const getRandomQuote = () => {
 
 const Home = () => {
   return (
+  <div>
     <div className="welcome-message">
       <h1>Welcome to Workout Hub</h1>
       <p>Your personal guide to fitness and workouts.</p>
@@ -50,7 +59,10 @@ const Home = () => {
               alt={`Image ${item.id}`}
             />
             <div className="image-caption">
-              <h3>{item.captionTitle}</h3>
+              <Link to={item.link} className='main-Link'>
+                {item.captionTitle}
+              </Link>
+              
             </div>
           </div>
         ))}
@@ -59,7 +71,13 @@ const Home = () => {
         <p>"{getRandomQuote()}"</p>
       </div>
     </div>
+    <Routes>
+      <Route path="/goals" element={carouselsData.element} />
+    </Routes>
+
+  </div>
   );
+
 };
 
 export default Home;

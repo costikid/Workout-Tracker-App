@@ -3,8 +3,10 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Home from './pages/Home.jsx';
 import Workouts from './pages/Workouts.jsx';
 import WorkoutList from './components/WorkoutList.jsx';
+import Goals from './components/Goals.jsx';
+import Records from './components/Records.jsx';
 import './App.css';
-
+// import './reset.css'
 const App = () => {
   const [workoutList, setWorkoutList] = useState([]);
 
@@ -30,6 +32,12 @@ const App = () => {
                 <li className="nav-item">
                   <Link className="nav-link" to="/workoutlist">Workout List</Link>
                 </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/goals">Goals</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/records">Records</Link>
+                </li>
               </ul>
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
@@ -48,6 +56,9 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/workouts" element={<Workouts onExerciseAdded={handleExerciseAdded} />} />
             <Route path="/workoutlist" element={<WorkoutList exercises={workoutList} />} />
+            <Route path="/goals" element={<Goals/>} />
+            <Route path="/records" element={<Records/>} />
+
           </Routes>
         </div>
       </div>
