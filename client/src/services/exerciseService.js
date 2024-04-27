@@ -1,4 +1,4 @@
-const BASE_URL = 'https://api-ninjas.com/api/exercises';
+const BASE_URL = 'https://api.api-ninjas.com/v1';
 
 export const fetchExercises = async (muscle, type, difficulty) => {
   const url = `${BASE_URL}/exercises?muscle=${muscle}&type=${type}&difficulty=${difficulty}`;
@@ -6,7 +6,9 @@ export const fetchExercises = async (muscle, type, difficulty) => {
     method: 'GET',
     headers: {
       'X-Api-Key': import.meta.env.VITE_API_KEY,
-    }
+    },
+    contentType: 'application/json',
+
   });
   if (!response.ok) {
     throw new Error('Failed to fetch exercises');
