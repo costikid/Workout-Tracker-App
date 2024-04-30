@@ -9,7 +9,9 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
-
+/* a{
+  text-decoration: none;
+} */
 .sidebar {
   width: 250px;
   background-color: #1f1f1f;
@@ -203,6 +205,7 @@ html body .btn.my-add-exercise-button:hover {
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.6);
   color: #fff;
+  text-decoration: none;
 }
 
 .quote-container {

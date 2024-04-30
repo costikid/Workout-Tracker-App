@@ -1,0 +1,34 @@
+#form {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    gap: 10px;
+    box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.5);
+    width: 300px;
+    height: fit-content;
+    padding: 30px;
+    color: rgb(255, 255, 255);
+    background-color: rgba(66, 66, 66, 0.706);
+    
+}
+  
+  #form button {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+  }
+  
+  #form input {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+ 
+#notation{
+  height: 6rem;
+}
+.max-char{
+  color: lightgray;
+  font-size: 0.8rem;
+}
