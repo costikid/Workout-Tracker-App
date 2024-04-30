@@ -47,7 +47,7 @@ const WorkoutList = ({ exercises, onWorkoutDone }) => {
         <>
           {exercises.map((exercise, index) => (
             <React.Fragment key={exercise._id}>
-              <WorkoutItem key={exercise._id} exercise={exercise} setWorkoutData={setWorkoutData} />
+              <WorkoutItem key={exercise._id} exercise={exercise} setWorkoutData={setWorkoutData}/>
               <hr className="my-4" style={{ borderColor: '#FFD700' }} />
             </React.Fragment>
           ))}

@@ -2,17 +2,31 @@ import React, { useState } from 'react';
 import '../App.css';
 import { fetchExercises, addExercise } from '../services/exerciseService';
 
+interface Exercise {
+  _id: string;
+  name: string;
+  type: string;
+  muscle: string;
+  difficulty: string;
+  instructions: string;
+}
+interface FormData {
+  muscle: string;
+  type: string;
+  difficulty: string;
+  exercises: string[];
+}
 const ExerciseForm = ({ onExerciseAdded }) => {
-  const [formData, setFormData] = useState({
-    muscle: '',
-    type: '',
-    difficulty: '',
-    exercises: [],
-  });
-  const [error, setError] = useState(null);
-  const [exercises, setExercises] = useState([]);
-  const [workoutInProgress, setWorkoutInProgress] = useState(false);
-  const [currentExerciseIndex, setCurrentExerciseIndex] = useState(-1);
+  const [formData, setFormData] = useState<FormData>({muscle: '',
+      type: '',
+      difficulty: '',
+      exercises: []
+    });
+
+  const [error, setError] = useState<null | string>(null);
+  const [exercises, setExercises] = useState<Exercise[]>([]);
+  const [workoutInProgress, setWorkoutInProgress] = useState<Boolean>(false);
+  const [currentExerciseIndex, setCurrentExerciseIndex] = useState<Number>(-1);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

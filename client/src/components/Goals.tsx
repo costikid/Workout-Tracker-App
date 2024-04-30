@@ -18,7 +18,7 @@ const Goals = () => {
     </div>
 
     <div className='form'>
-    <GoalsForm/>
+    <GoalsForm setGoals={undefined}/>
     </div>
     </>
 )

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import Home from './pages/Home.jsx';
-import Workouts from './pages/Workouts.jsx';
-import WorkoutList from './components/WorkoutList.jsx';
-import Goals from './components/Goals.jsx';
-import Records from './components/Records.jsx';
+import { Link, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
+import Goals from './components/Goals.tsx';
+import Records from './components/Records.tsx';
+import WorkoutList from './components/WorkoutList.tsx';
+import Home from './pages/Home.tsx';
+import Workouts from './pages/Workouts.tsx';
 // import './reset.css'
 const App = () => {
   const [workoutList, setWorkoutList] = useState([]);
@@ -55,7 +55,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/workouts" element={<Workouts onExerciseAdded={handleExerciseAdded} />} />
-            <Route path="/workoutlist" element={<WorkoutList exercises={workoutList} />} />
+            <Route path="/workoutlist" element={<WorkoutList exercises={workoutList} onWorkoutDone={undefined} />} />
             <Route path="/goals" element={<Goals/>} />
             <Route path="/records" element={<Records/>} />
 

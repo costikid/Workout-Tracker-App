@@ -4,27 +4,29 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import '../App.css';
 import './Home.css'
 
-import carousel1Img1 from '../images/carousel-1-img-1.jpg';
-import carousel2Img1 from '../images/carousel-2-img-1.jpg';
-import carousel3Img1 from '../images/carousel-3-img-1.jpg';
-
+interface CarouselsData{
+    id: Number,
+    imgSrc: String,
+    captionTitle: String,
+    link: String,
+}
 const carouselsData = [
   {
     id: 1,
-    imgSrc: carousel1Img1,
+    imgSrc: '../images/carousel-1-img-1.jpg',
     captionTitle: 'Elevate Your Fitness Game',
     link: '#',
   },
   {
     id: 2,
-    imgSrc: carousel2Img1,
+    imgSrc: '../images/carousel-2-img-1.jpg',
     captionTitle: 'Set Your Goals',
     link: '/goals',
 
   },
   {
     id: 3,
-    imgSrc: carousel3Img1,
+    imgSrc: '../images/carousel-3-img-1.jpg',
     captionTitle: 'Join Our Community',
     link: '#',
 
@@ -71,9 +73,6 @@ const Home = () => {
         <p>"{getRandomQuote()}"</p>
       </div>
     </div>
-    <Routes>
-      <Route path="/goals" element={carouselsData.element} />
-    </Routes>
 
   </div>
   );
