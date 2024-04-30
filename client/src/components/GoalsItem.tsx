@@ -1,5 +1,6 @@
 import React from "react";
-import Goals from "./Goals";
+import "./Goals.css";
+
 //pass one goal only not an array
 interface Props {
   goal: {
