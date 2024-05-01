@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import '../App.css';
 import './Home.css'
+import img1 from '../images/carousel-1-img-1.jpg';
+import img2 from '../images/carousel-2-img-1.jpg';
+import img3 from '../images/carousel-3-img-1.jpg';
 
 interface CarouselsData{
     id: Number,
@@ -13,20 +16,20 @@ interface CarouselsData{
 const carouselsData = [
   {
     id: 1,
-    imgSrc: '../images/carousel-1-img-1.jpg',
+    imgSrc: img1,
     captionTitle: 'Elevate Your Fitness Game',
     link: '#',
   },
   {
     id: 2,
-    imgSrc: '../images/carousel-2-img-1.jpg',
+    imgSrc: img2,
     captionTitle: 'Set Your Goals',
     link: '/goals',
 
   },
   {
     id: 3,
-    imgSrc: '../images/carousel-3-img-1.jpg',
+    imgSrc: img3,
     captionTitle: 'Join Our Community',
     link: '#',
 
