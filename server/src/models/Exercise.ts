@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document, type Types } from "mongoose";
 
 export interface ExerciseModel extends Document {
   name: string;

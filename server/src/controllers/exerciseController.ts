@@ -8,11 +8,11 @@ export const createExercise = async (
   try {
     const { name, type, muscle, difficulty, instructions } = req.body;
     const exercise: ExerciseModel = new Exercise({
-      name,
-      type,
-      muscle,
-      difficulty,
-      instructions,
+      name: req.body.name,
+      type: req.body.type,
+      muscle: req.body.muscle,
+      difficulty: req.body.difficulty,
+      instructions: req.body.instructions,
     });
     await exercise.save();
     res.status(201).json({ success: true, data: exercise });
@@ -44,9 +44,9 @@ export const updateExercise = async (
     const exercise: ExerciseModel | null = await Exercise.findByIdAndUpdate(
       req.params.id,
       {
-        name,
-        sets,
-        reps,
+        name: req.body.name,
+        sets: req.body.sets,
+        reps: req.body.sets,
         restInterval,
       },
       { new: true }
@@ -88,7 +88,6 @@ export const markWorkoutDone = async (
   res: Response
 ): Promise<void> => {
   try {
-    // Your implementation
   } catch (error) {
     console.error("Error updating workout history:", error);
     res.status(500).json({ success: false, error: "Server error" });
@@ -100,7 +99,6 @@ export const getExerciseLiftHistory = async (
   res: Response
 ): Promise<void> => {
   try {
-    // Your implementation
   } catch (error) {
     console.error("Error fetching lift history:", error);
     res.status(500).json({ success: false, error: "Server error" });
