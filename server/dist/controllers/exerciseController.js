@@ -18,11 +18,11 @@ const createExercise = (req, res) => __awaiter(void 0, void 0, void 0, function*
     try {
         const { name, type, muscle, difficulty, instructions } = req.body;
         const exercise = new Exercise_1.default({
-            name,
-            type,
-            muscle,
-            difficulty,
-            instructions,
+            name: req.body.name,
+            type: req.body.type,
+            muscle: req.body.muscle,
+            difficulty: req.body.difficulty,
+            instructions: req.body.instructions,
         });
         yield exercise.save();
         res.status(201).json({ success: true, data: exercise });
@@ -48,9 +48,9 @@ const updateExercise = (req, res) => __awaiter(void 0, void 0, void 0, function*
     try {
         const { name, sets, reps, restInterval } = req.body;
         const exercise = yield Exercise_1.default.findByIdAndUpdate(req.params.id, {
-            name,
-            sets,
-            reps,
+            name: req.body.name,
+            sets: req.body.sets,
+            reps: req.body.sets,
             restInterval,
         }, { new: true });
         if (!exercise) {
@@ -84,7 +84,6 @@ const deleteExercise = (req, res) => __awaiter(void 0, void 0, void 0, function*
 exports.deleteExercise = deleteExercise;
 const markWorkoutDone = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        // Your implementation
     }
     catch (error) {
         console.error("Error updating workout history:", error);
@@ -94,7 +93,6 @@ const markWorkoutDone = (req, res) => __awaiter(void 0, void 0, void 0, function
 exports.markWorkoutDone = markWorkoutDone;
 const getExerciseLiftHistory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        // Your implementation
     }
     catch (error) {
         console.error("Error fetching lift history:", error);
