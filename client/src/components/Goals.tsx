@@ -14,12 +14,13 @@ const Goals = () => {
         <p className="section-description">Never give up. Just catch it!</p>
       </div>
 
-      <div className="form">
-        <GoalsForm setGoals={setGoals} />
-      </div>
-
-      <div>
-        <GoalsList list={goals} />
+      <div className="wrapper">
+        <div className="list">
+          <GoalsList list={goals} />
+        </div>
+        <div className="form">
+          <GoalsForm setGoals={setGoals} />
+        </div>
       </div>
     </>
   );

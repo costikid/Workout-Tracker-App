@@ -96,8 +96,10 @@ const ExerciseForm = ({ onExerciseAdded }) => {
   const difficultyOptions = ["Beginner", "Intermediate", "Advanced"];
 
   return (
+    <div className="setback">
+    
     <div className="container">
-      <div className="card mt-4">
+      <div className="card">
         <div className="card-body">
           {error && <p className="error-message">{error}</p>}
           <form
@@ -196,6 +198,7 @@ const ExerciseForm = ({ onExerciseAdded }) => {
           </ul>
         </div>
       )}
+    </div>
     </div>
   );
 };

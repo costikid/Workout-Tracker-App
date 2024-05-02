@@ -3,9 +3,9 @@ import GoalsItem from "./GoalsItem";
 
 function GoalsList({ list }) {
   return (
-    <div id="list">
+    <div className="list">
       {list.map((item, i) => (
-        <GoalsItem key={item._id} goal={item} header={""}></GoalsItem>
+        <GoalsItem key={item._id} goal={item}></GoalsItem>
       ))}
     </div>
   );
